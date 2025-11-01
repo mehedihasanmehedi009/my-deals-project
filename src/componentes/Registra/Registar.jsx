@@ -54,10 +54,9 @@ const Registar = () => {
         <button className="btn btn-neutral w-full mt-4">Register</button>
       </fieldset>
 
-      {/* Divider */}
-      <div className="divider text-gray-400">OR</div>
+     
 
-      {/* Google Sign Up Button */}
+      {/* Google Sign Up Button
       <button
         onClick={() => console.log("Google Sign Up Clicked")}
         className="btn w-full bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 flex items-center justify-center gap-2"
@@ -68,7 +67,7 @@ const Registar = () => {
           className="w-5 h-5"
         />
         Continue with Google
-      </button>
+      </button> */}
 
       <p className="text-center text-sm text-gray-500 mt-4">
         Already have an account?{" "}

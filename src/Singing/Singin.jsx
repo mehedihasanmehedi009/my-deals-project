@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router';
+import { Authcontext } from '../context/authprovider';
+import { toast } from 'react-toastify';
 
 const Singin = () => {
+const {  singinGoogle}= useContext(Authcontext)
+  const  hendelsing = ()=>{
+  singinGoogle()
+  .then(result =>{
+    console.log(result.user)
+    const NewUsers = { 
+      name:result.user.displayName,
+      email:result.user.email,
+      image:result.user.photoURL
+    }
+    fetch("http://localhost:3000/Users",{
+      method:"POST",
+        headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(NewUsers),
+    })
+      .then(res=> res.json())
+      .then(data =>{
+        console.log(data)
+      })
+    
+
+    toast.success("Google Sing In Sucess Now.........?")
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+  }
     return (
          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200">
   <div className="card w-full max-w-sm bg-white shadow-xl rounded-2xl border border-gray-100">
@@ -43,7 +74,7 @@ const Singin = () => {
 
       {/* Google Sign In Button */}
       <button
-        onClick={() => console.log("Google Sign In Clicked")}
+        onClick={hendelsing}
         className="btn w-full bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 flex items-center justify-center gap-2"
       >
         <img
@@ -56,9 +87,9 @@ const Singin = () => {
 
       <p className="text-center text-sm text-gray-500 mt-4">
         Don't have an account?{" "}
-        <a to="/registar" className="link text-blue-600 font-medium hover:underline" href="/register">
-          <Link to="/registar">  Register</Link>
-        </a>
+ 
+          <Link to="/registar" className='link text-blue-600 font-medium hover:underline'>  Register</Link>
+       
       </p>
     </div>
   </div>

@@ -1,7 +1,13 @@
- import React from "react";
+ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router"; // ✅  
+import { Authcontext } from "../../context/authprovider";
+import { auth } from "../../firebase.init";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+
+  const {user} = useContext(Authcontext)
   const links = (
     <>
       <li>
@@ -24,9 +30,42 @@ const Navbar = () => {
           All Products
         </NavLink>
       </li>
+      {
+        user &&<>
+        <li>
+        <NavLink
+          to="/Myproducts"
+          className={({ isActive }) =>
+            isActive ? "text-blue-600 font-semibold" : ""
+          }
+        >
+          My Products
+        </NavLink>
+      </li>
+       <li>
+        <NavLink
+          to="/Mybites"
+          className={({ isActive }) =>
+            isActive ? "text-blue-600 font-semibold" : ""
+          }
+        >
+          My Bites
+        </NavLink>
+      </li>
+      </>
+      }
     </>
   );
+ 
 
+ 
+   const hendelsingout =  ()=>{
+       signOut(auth).then(() => {
+             toast.success(" Sing Out Success Now")
+}).catch(error => {
+  console.log(error)
+});
+   }
   return (
     <div className="navbar bg-base-100 shadow-md fixed top-0 left-0 w-full z-50">
       <div className="navbar-start">
@@ -64,7 +103,9 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end">
-        < Link to="/login" className="mr-5 btn btn-primary">Login</Link >
+         {
+          user ? < Link  onClick={hendelsingout } className="mr-5 btn btn-primary">Sign Out</Link > :< Link to="/login" className="mr-5 btn btn-primary">Login</Link >
+         }
       </div>
     </div>
   );

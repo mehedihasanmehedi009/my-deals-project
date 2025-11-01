@@ -19,7 +19,7 @@ const Authprovider = ({ children }) => {
         return signInWithEmailAndPassword(auth,email,password)}
 
         const singinGoogle = ()=>{
-            return signInWithPopup(auth , provider)
+            return signInWithPopup(auth,provider)
         }
 
         useEffect(()=>{

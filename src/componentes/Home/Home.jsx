@@ -1,9 +1,11 @@
 import React from 'react';
-
+import LatestProduct from '../../LatestProduct/LatestProduct';
+const userPromis = fetch("http://localhost:3000/latest-prtoducts")
+.then(res=>res.json())
 const Home = () => {
     return (
         <div>
-            <h1 className='bg-primary'> Hello I am mehedi </h1>
+             <LatestProduct userPromis={userPromis}></LatestProduct>
         </div>
     );
 };

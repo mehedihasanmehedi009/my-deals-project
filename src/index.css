@@ -3,6 +3,17 @@
 @plugin "daisyui/theme"{
     name:"light";
     default:true ;
-     --color-primary:blue;
-  --color-secondary:teal;
+ --color-primary: #632EE3;       
+  --color-secondary: #9F62F2;
 }
+ 
+  .btn-primary {
+    background-image: linear-gradient(to right, #632EE3, #9F62F2) !important;
+    color: white !important;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(0.95);
+  }
+ 
