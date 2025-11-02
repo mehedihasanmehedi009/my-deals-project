@@ -5,10 +5,10 @@ import ImgR from "../assets/bg-hero-right.png";
 
 const LatestProduct = ({ userPromis }) => {
   const latestp = use(userPromis);
-  console.log(latestp);
+  // console.log(latestp);
 
   return (
-    <div className=" ">
+    <div className=" mt-8 ">
       <div className="flex flex-col md:flex-row bg-[linear-gradient(90deg,#FFE6FD,#E0F8F5)] justify-between items-center text-center px-6 md:px-10 py-10">
   {/* Left Image */}
   <div className="hidden md:block mb-6 md:mb-0 -ml-8">
@@ -49,11 +49,11 @@ const LatestProduct = ({ userPromis }) => {
 </div>
 
 <div className="pt-20 px-6">
-  <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">
+  <h2 className="md:text-5xl text-2xl font-bold text-center mb-8 text-gray-800">
     Latest Products
   </h2>
 
-  <div className=" container m-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <div className=" container w-8/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-4">
     {latestp.map((product) => (
       <Products key={product._id} product={product} />
     ))}
