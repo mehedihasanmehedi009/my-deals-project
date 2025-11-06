@@ -1,27 +1,20 @@
 import React, { use, useEffect, useState } from 'react';
 import { Authcontext } from '../../context/authprovider';
 import Swal from 'sweetalert2';
+import useAxiusSecure from '../../Hoouk/useAxiusSecur';
 
 const MyBites = () => {
     const {user} = use(Authcontext)
     const [bits,setBituser]=useState([])
-             useEffect(()=>{
-                if(user?.email){
-                    fetch(`http://localhost:3000/bits?email=${user.email}`)
-                    .then(res=>res.json())
-                    .then(data=>
-                       {
-                          console.log(data)
-                        setBituser(data)
-                        bits.sort ((a,b)=>b.bite_price-a.bite_price)
-                       }
-                    )
-
-                }
-                
-             },[user?.email])
-             const hendel =(_id) =>{
-             
+     const secure = useAxiusSecure()
+     
+            useEffect(()=>{
+              secure.get(`/bits?email=${user.email}`)
+              .then(data=>{
+                setBituser(data.data)
+              })
+            },[user,secure])
+             const hendel =(_id) =>{           
 Swal.fire({
   title: "Are you sure?",
   text: "You won't be able to revert this!",

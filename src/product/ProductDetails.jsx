@@ -1,23 +1,36 @@
  import { use,  useEffect,  useRef, useState } from 'react';
 import {  useLoaderData } from 'react-router';
 import { Authcontext } from '../context/authprovider';
- 
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const ProductDetails = () => {
     const {_id: productId} = useLoaderData();
     const [userbit,setBituser]=useState([])
     const bitModal = useRef(null);
     const {user} = use(Authcontext)
-    
+      
      useEffect(()=>{
-             fetch(`http://localhost:3000/product/bits/${productId}`)
-             .then(res=>res.json())
-             .then(data=>{
-                console.log(data)
-                setBituser(data)
-             })
+      axios.get(`http://localhost:3000/product/bits/${productId}`)
+      .then(data=>{
+           console.log("this is ",data)
+           setBituser(data.data)
+      })
+   
      },[productId])
+    
+    //  useEffect(()=>{
+    //          fetch(`http://localhost:3000/product/bits/${productId}`,{
+    //             //  headers:{
+    //             //       authorization:`Behebir ${user.accessToken}`
+    //             //       }
+    //          })
+    //          .then(res=>res.json())
+    //          .then(data=>{
+    //             // console.log(data)
+    //             setBituser(data)
+    //          })
+    //  },[productId])
 
 
     const handleOpenModal = () => {
@@ -29,7 +42,7 @@ const ProductDetails = () => {
        const  name = e.target.name.value
        const  email = e.target.email.value
        const  bite = e.target.bite.value
-    console.log( productId,name,email,bite )
+    // console.log( productId,name,email,bite )
     const newBid ={
         product :productId,
         buyer_name:name,
@@ -158,7 +171,7 @@ const ProductDetails = () => {
     <tbody>
       {/* row 1 */}
  {
-    userbit.map((p,index) =><tr>
+    userbit.map((p,index) =><tr key={p._id}>
         <th>
         {index+1}
         </th>
